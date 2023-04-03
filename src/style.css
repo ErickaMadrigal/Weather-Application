@@ -113,3 +113,13 @@ button[type="submit"]:hover {
 .no_link:active {
   color: red;
 }
+
+.footer_source_code {
+  margin-left: 100px;
+  color: white;
+  padding: 10px;
+}
+
+.link_source_code {
+  color: cyan;
+}
