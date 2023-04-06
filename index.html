@@ -3,121 +3,67 @@
   <head>
     <meta charset="UTF-8" />
     <title>Weather App</title>
+
     <link rel="stylesheet" href="src/style.css" />
     <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
       rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+      integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ"
+      crossorigin="anonymous"
     />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+      crossorigin="anonymous"
+    ></script>
     <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
   </head>
   <body>
     <div class="container" text-center>
-      <h1>Weather App</h1>
-      <form>
-        <label for="search">Search for a location:</label>
-        <input
-          type="text"
-          id="search-city"
-          name="search"
-          placeholder="Enter the city"
-          autofocus
-        />
-        <div class="button-container">
-          <button type="submit" class="search_Button" id="search-button">
-            Search
-          </button>
-          <button type="submit" class="current_Button" id="current-button">
-            Current
-          </button>
-        </div>
-      </form>
-      <div class="weather_today">
-        <div class="weather_details">
+      <div class="weather-app-wrapper">
+        <div class="weather-app">
+          <div class="overview">
+            <h1>New York</h1>
+            <ul>
+              <li>Friday 5:00</li>
+              <li>Clear</li>
+            </ul>
+          </div>
           <div class="row">
-            <div class="col-lg-15">
-              <h2 class="weather_city" id="city-name">City</h2>
-              <p class="weather_day" id="date-time">Wednesday</p>
-              <div class="weather_current">
-                <p class="weather_indicator humidity">
-                  <span class="value">💧 50</span>%
-                </p>
-                <p class="weather_indicator wind">
-                  <span class="value">💨 East, 10</span>m/s
-                </p>
-              </div>
-              <div class="weather_temperature">
-                <span class="value" id="current-temp"></span>
-                <a class="no_link" href="#" id="celsius-link"> &deg;C</a> |
-                <a class="no_link" href="#" id="fahrenheit-link"> &deg;F</a>
-              </div>
-              <div class="col-sm-12">
-                <div class="main_weather_icon">
-                  <div class="main_weather_icon">☀️</div>
+            <div class="col-6">
+              <div class="d-flex weather-temperature">
+                <img
+                  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEgAACxIB0t1+/AAAAjdJREFUeNrtmsGtgzAMhjtCRmAERsgIHYFjjx2BERiBEToCI+TaG2+DbJBnKj8pD1Eaiv8AwpX+C1Ap/hzHjpNLCOFyZl0UgAJQAApAASgABaAAFIACODEA9C/83AypIrUkRwpv5Pib4dsCNp5cAMgIS3rMGPxJw3/t4QDQoEtSt8LwsTpJEFAAAONjNUM4HSIEOO7vJC8Mwa2FkHURZBDSM2KAWu4CwPP5LEgtyZMCy/OzIgKBgGA2BUAGliPDxxreldFM2EU4JAOgwRtSPeHdmj0/Z3z8fcEQasTCiATgEgxMURvNAkR2sOIA2MtBSH60KNbC4dAhAHhBACFDdrBiADj2A0DI7PA4AgB0dihWAaBBXUk92Hhkdqi+BsDGh8ySzg7tGgD9BgC88FrgvgKQIeY/ZgepxXB3m6EFm6bm7ADqQwDggSLUHQVA2KG6P50JQJ+a96UBuC08OwqRerOWGPftkUa7Oc/GrTBKo5b0mEivwzOLAlABjb8v6EY1CXVGgwCAampUqZ5NNP5fuS1aB6w87Zn1PG+XpStOKw3AIro5IONfM0e8EhRsZFxz7EYRACRmgQc0YPMAENrAdJk6UBgAKwojz/W/yQUgXgilARguS5dUd2Yir+foPzSQ7TAfifdLOjZvzhSzQID0A3gmuJTDzIQzRXg4IC9IvFsY68jzWxr/qgvQV2TsRJ1gwMXOIuW+JNWhjtx2DWCDE6fvAOhNUQWgABSAAlAACkABKAAFoABOp1+6Bd0LJ+BorgAAAABJRU5ErkJggg=="
+                  alt="Cloudy"
+                  id="icon"
+                />
+                <div>
+                  <strong id="temperature">12</strong
+                  ><span class="units"
+                    >°C | <a class="no-underline" href="#">°F</a></span
+                  >
                 </div>
               </div>
             </div>
+            <div class="col-6">
+              <ul>
+                <li>Precipitation: 0%</li>
+                <li>Humidity: 73%</li>
+                <li>Wind: 2 km/h</li>
+              </ul>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="weather_forecast">
-        <div class="row row-cols-5">
-          <div class="col">
-            <article class="weather_forcast_each">
-              <p class="weather_icon">🌤️</p>
-              <h3 class="weather_forecast_day">Monday</h3>
-              <p class="weather_forecast_temp">
-                <span class="value">25</span>&deg;C
-              </p>
-            </article>
-          </div>
-          <div class="col">
-            <article class="weather_forcast_each">
-              <p class="weather_icon">☀️</p>
-              <h3 class="weather_forecast_day">Tuesday</h3>
-              <p class="weather_forecast_temp">
-                <span class="value">25</span>&deg;C
-              </p>
-            </article>
-          </div>
-          <div class="col">
-            <article class="weather_forcast_each">
-              <p class="weather_icon">⛈️</p>
-              <h3 class="weather_forecast_day">Wednesday</h3>
-              <p class="weather_forecast_temp">
-                <span class="value">25</span>&deg;C
-              </p>
-            </article>
-          </div>
-          <div class="col">
-            <article class="weather_forcast_each">
-              <p class="weather_icon">🌨️</p>
-              <h3 class="weather_forecast_day">Thursday</h3>
-              <p class="weather_forecast_temp">
-                <span class="value">25</span>&deg;C
-              </p>
-            </article>
-          </div>
-          <div class="col">
-            <article class="weather_forcast_each">
-              <p class="weather_icon">🌧️</p>
-              <h3 class="weather_forecast_day">Friday</h3>
-              <p class="weather_forecast_temp">
-                <span class="value">25</span>&deg;C
-              </p>
-            </article>
-          </div>
-        </div>
+        <small>
+          <a
+            href="https://github.com/ErickaMadrigal/Weather-Application"
+            target="_blank"
+            >Open-Source Code
+          </a>
+          by Ericka Madrigal
+        </small>
       </div>
     </div>
-    <footer class="footer_source_code">
-      <a
-        href="https://github.com/ErickaMadrigal/Weather-Application"
-        target="_blank"
-        class="link_source_code"
-        >Open-source code</a
-      >
-      by Ericka Madrigal
-    </footer>
     <script src="src/javascript.js"></script>
   </body>
 </html>
