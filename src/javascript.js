@@ -53,6 +53,7 @@ function handleSubmit(event) {
   event.preventDefault();
   let cityInputElement = document.querySelector("#city-input");
   search(cityInputElement.value);
+  document.getElementById("search-form").reset();
 }
 function displayFahrenheitTemperature(event) {
   event.preventDefault();
