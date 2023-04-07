@@ -1,6 +1,3 @@
-let apiKey = "d25cd9cdbd7c9f03325b6cee2badce14";
-let city = "Redmond";
-let apiURL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
 function formatDate(timestamp) {
   let date = new Date(timestamp);
   let hours = date.getHours();
@@ -46,4 +43,19 @@ function displayTemperature(response) {
   );
   iconElement.setAttribute("alt", response.data.weather[0].description);
 }
-axios.get(apiURL).then(displayTemperature);
+
+function search(city) {
+  let apiKey = "d25cd9cdbd7c9f03325b6cee2badce14";
+  let apiURL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+  axios.get(apiURL).then(displayTemperature);
+}
+function handleSubmit(event) {
+  event.preventDefault();
+  let cityInputElement = document.querySelector("#city-input");
+  search(cityInputElement.value);
+}
+
+/*let form = document.querySelector("search-form");
+form.addEventListener("submit", handleSubmit);*/
+let searchButton = document.querySelector("#search-button");
+searchButton.addEventListener("click", handleSubmit);
