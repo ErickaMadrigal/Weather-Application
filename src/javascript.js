@@ -31,7 +31,8 @@ function displayTemperature(response) {
   let dateElement = document.querySelector("#date");
   let iconElement = document.querySelector("#icon");
   let iconCode = response.data.weather[0].icon;
-  temperatureElement.innerHTML = Math.round(response.data.main.temp);
+  celsiusTemperature = response.data.main.temp;
+  temperatureElement.innerHTML = Math.round(celsiusTemperature);
   cityElement.innerHTML = response.data.name;
   descriptionElement.innerHTML = response.data.weather[0].description;
   humidityElemnt.innerHTML = response.data.main.humidity;
@@ -54,8 +55,35 @@ function handleSubmit(event) {
   let cityInputElement = document.querySelector("#city-input");
   search(cityInputElement.value);
 }
+function displayFahrenheitTemperature(event) {
+  event.preventDefault();
+  let fahrenheitTemperature = Math.round((celsiusTemperature * 9) / 5 + 32);
+  //alert(fahrenheitTemperature);
+  let temperatureElement = document.querySelector("#temperature");
+  temperatureElement.innerHTML = fahrenheitTemperature;
+  //Remove the active class from the celsius-link
+  celsiusLink.classList.remove("active");
+  fahrenheitLink.classList.add("active");
+}
 
-/*let form = document.querySelector("search-form");
-form.addEventListener("submit", handleSubmit);*/
+function displayCelsiusTemperature(event) {
+  event.preventDefault();
+  let temperatureElement = document.querySelector("#temperature");
+  //alert(celsiusTemperature);
+  temperatureElement.innerHTML = Math.round(celsiusTemperature);
+  celsiusLink.classList.add("active");
+  fahrenheitLink.classList.remove("active");
+}
+
+let celsiusTemperature = null;
+
 let searchButton = document.querySelector("#search-button");
 searchButton.addEventListener("click", handleSubmit);
+
+let fahrenheitLink = document.querySelector("#fahrenheit-link");
+fahrenheitLink.addEventListener("click", displayFahrenheitTemperature);
+
+let celsiusLink = document.querySelector("#celsius-link");
+celsiusLink.addEventListener("click", displayCelsiusTemperature);
+
+search("Redmond");
