@@ -22,7 +22,6 @@ function formatDate(timestamp) {
   return `${day} ${hours}:${minutes}`;
 }
 function displayTemperature(response) {
-  console.log(response.data.main.temp);
   let temperatureElement = document.querySelector("#temperature");
   let cityElement = document.querySelector("#city");
   let descriptionElement = document.querySelector("#description");
@@ -58,10 +57,8 @@ function handleSubmit(event) {
 function displayFahrenheitTemperature(event) {
   event.preventDefault();
   let fahrenheitTemperature = Math.round((celsiusTemperature * 9) / 5 + 32);
-  //alert(fahrenheitTemperature);
   let temperatureElement = document.querySelector("#temperature");
   temperatureElement.innerHTML = fahrenheitTemperature;
-  //Remove the active class from the celsius-link
   celsiusLink.classList.remove("active");
   fahrenheitLink.classList.add("active");
 }
@@ -75,6 +72,24 @@ function displayCelsiusTemperature(event) {
   fahrenheitLink.classList.remove("active");
 }
 
+function getPosition(position) {
+  let latitude = position.coords.latitude;
+  let longitude = position.coords.longitude;
+  let apiKey = "d25cd9cdbd7c9f03325b6cee2badce14";
+  let units = "metric";
+  axios
+    .get(
+      `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&&units=${units}`
+    )
+    .then(defaultWeather)
+    .catch(handleError);
+}
+
+function defaultWeather(response) {
+  let cityName = response.data.name;
+  search(cityName);
+}
+
 let celsiusTemperature = null;
 
 let searchButton = document.querySelector("#search-button");
@@ -86,4 +101,4 @@ fahrenheitLink.addEventListener("click", displayFahrenheitTemperature);
 let celsiusLink = document.querySelector("#celsius-link");
 celsiusLink.addEventListener("click", displayCelsiusTemperature);
 
-search("Redmond");
+navigator.geolocation.getCurrentPosition(getPosition);
